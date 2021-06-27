@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+   <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+   <title>Color Flipper</title>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         box-shadow: border-box;
+      }
+      body {
+         font-family: 'Teko', sans-serif;
+         background: #fef8ec;
+      }
+      .col {
+         position: relative;
+         height: 100vh;
+      }
+      .header-txt {
+         margin-bottom: 15px;
+      }
+      #color-box {
+         max-width: 500px;
+         margin: auto;
+         background: #fff;
+         box-shadow: 0px 5px 60px -30px;
+         border-radius: 5px;
+         padding: 1px;
+      }
+      #code-box {
+         margin: 0;
+         display: block;
+         border-radius: 5px;
+         background: #f3685f;
+         padding: 40px;
+         margin: 20px;
+         margin-bottom: 0;
+         position: relative;
+      }
+      #color-code {         
+         font-size: 28px;
+         margin: 0;
+         background: none;
+         border: none;
+         text-align: center;
+         padding: 0;
+         margin: 0;
+         height: calc(1em + 0rem + 0px);
+         color: #222;
+      }
+      .btn {
+         color: #666;
+         font-size: 20px;
+         cursor: pointer;
+         padding: 20px;
+         line-height: 1;
+      }
+      .form-control:focus,
+      .btn:focus {
+         outline: 0;
+         box-shadow: 0 0 0 0rem rgb(0 123 255 / 25%);
+      }
+      #copyCode {
+         position: absolute;
+         right: 20px;
+         top: 50%;
+         transform: translateY(-50%);
+         cursor: pointer;
+         font-size: 18px;
+         padding: 0;
+         margin: 0;
+      }
+      .fa-clone {
+         color: #222;
+      }
+   </style>
+</head>
+<body>
+   
+
+   <div class="container text-center">
+      <div class="row">
+         <div class="col d-flex flex-column justify-content-center">
+            <div class="box">
+               <h1 class="header-txt">Color Flipper</h1>
+               <div id="color-box">
+                  <div id="code-box">
+                     <!-- <p id="color-code">#F3685F</p> -->
+                     <input type="text" class="form-control" id="color-code" value="#F3685F">
+                     <button class="btn" id="copyCode">
+                        <i class="far fa-clone"></i>
+                     </button>
+                  </div>
+                  <button class="btn" id="generate-color">Generate Color</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+
+
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script>
+      const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"]
+
+      const generateColor = document.getElementById("generate-color");
+      generateColor.addEventListener("click", () => {
+         let hexColor = "#";
+         for (let i = 0; i < 6; i++) {
+            hexColor += hex[getRandomNmbr()]
+         }
+         //set color and color code in html
+         document.getElementById("color-code").value = hexColor;
+         document.getElementById("code-box").style.background = hexColor;
+      })
+
+      //create random number using function
+      const getRandomNmbr = () => {
+         return Math.floor(Math.random() * hex.length)
+      }
+
+      //copy color code
+      const copyCodeBtn = document.getElementById("copyCode");
+      copyCodeBtn.addEventListener("click", () => {
+         let copyText = document.getElementById("color-code");
+         copyText.select();
+         copyText.setSelectionRange(0, 99999);
+         document.execCommand("copy");
+      })
+   </script>
+</body>
+</html>
